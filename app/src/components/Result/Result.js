@@ -2,8 +2,8 @@ import './style.css';
 import { useSelector } from 'react-redux'
 
 export function Result () {
-  const palabra = useSelector(state => state.word)
-  console.log(palabra.word.split(''))
+  const word = useSelector(state => state.word)
+  console.log(word.word.split(''))
   return (
     <div>
       <h1>Hola</h1>
