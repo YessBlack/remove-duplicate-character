@@ -1,12 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './style.css';
+import { useDispatch } from "react-redux";
+import { setCharacter } from "../../feature/word/wordSlice";
 
 export function Form({imgBanner, imgLogo}) {
   const [error, setError] = useState('');
   const [word, setWord] = useState('');
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setCharacter(word))
+    navigate('/result')
   }
 
   const handleChange = (e) => {

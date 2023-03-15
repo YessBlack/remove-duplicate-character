@@ -3,10 +3,19 @@ import { useSelector } from 'react-redux'
 
 export function Result () {
   const word = useSelector(state => state.word)
-  console.log(word.word.split(''))
+  console.log(word)
+  const arrWord = word.split('')
+
   return (
-    <div>
+    <>
       <h1>Hola</h1>
-    </div>
+      {
+        arrWord.map((word, i) => (
+          <div key={i}>
+            {word}
+          </div>
+        ))
+      }
+    </>
   )
 }
