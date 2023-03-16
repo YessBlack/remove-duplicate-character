@@ -1,3 +1,11 @@
+.container-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 3rem;
+}
+
 .container-form img {
   width: 400px;
 }
@@ -5,19 +13,7 @@
 .img-logo img {
   width: 100px;
 }
-.title {
-  padding: 3rem 10rem;
-}
-.title span {
-  background-color: #FF3030;
-  padding: .5rem;
-}
-.container-form {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
+
 .form {
   display: flex;
   flex-direction: column;

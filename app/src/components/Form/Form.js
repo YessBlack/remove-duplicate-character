@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import { useDispatch } from "react-redux";
 import { setCharacter } from "../../feature/word/wordSlice";
+import { Header } from "../Header/Header";
 
 export function Form({imgBanner, imgLogo}) {
   const [error, setError] = useState('');
@@ -13,7 +14,7 @@ export function Form({imgBanner, imgLogo}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setCharacter(word))
+    dispatch(setCharacter(word.toUpperCase()))
     navigate('/result')
   }
 
@@ -32,9 +33,7 @@ export function Form({imgBanner, imgLogo}) {
 
   return (
     <section>
-      <h1 className="title">
-        Duplicate Character<span>Remover</span>
-      </h1>
+      <Header />
       <div className="container-form">
         <img src={imgBanner} alt='banner'/>
         <div className="form">
