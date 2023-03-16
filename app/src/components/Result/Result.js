@@ -9,31 +9,46 @@ export function Result () {
   const [arrWord, setArrWord] = useState([])
   const [isFinalyApp, setIsFinalyApp] = useState(false)
   const exitModal = useRef(null)
-  const sizeUnic = useRef(null)
 
-  const word = useSelector(state => state.word)
-  
+  const word= useSelector(state => state.word)
+
   useEffect(() => {
-    setArrWord(word.word.replace(/\s/g, '').split(''))
+    setArrWord(word.word)
   }, [])
 
+  useEffect(() => {
+    if (arrWord.length === 0) return
+    if (arrWord.length === new Set(arrWord).size) {
+      setIsFinalyApp(true)
+      confetti({
+        particleCount: 200,
+        spread: 200
+      });
+    }
+
+    return () => {
+      setIsFinalyApp(false)
+    }
+  }, [arrWord])
 
   const handleClick = (word, index) => {
     setArrWord(arrWord.filter((el,i) => el !== word ? el : i === index ? el : null ))
   }
 
-  useEffect(() => {
-    sizeUnic.current = new Set(arrWord).size
-    if (sizeUnic.current === arrWord.length) {
-      setIsFinalyApp(true)
-    }
-  }, [arrWord])
-
-  console.log('Size unique ', sizeUnic.current, 'arr original ',arrWord.length, isFinalyApp)
-
   const handleExit = () => {
     exitModal.current = document.querySelector('.container-finaly-app')
     exitModal.current.classList.add('exit')
+  }
+
+  const randomColors = (num) => {
+    let hexadecimal = "0123456789ABCDEF";
+	  let color = "#";
+
+	  for(var i = 0; i < 6; i++){
+		  color = color + hexadecimal[Math.floor(Math.random() * 16)];
+	  }
+
+    return color
   }
 
   return (
@@ -51,7 +66,7 @@ export function Result () {
       <section className='container-card'>
       {
         arrWord.map((word, i) => (
-          <div key={i} className='card' onClick={() => handleClick(word, i)}>
+          <div key={i} className={`${word} card`} onClick={() => handleClick(word, i)} >
             <span className='icon-times'></span>
             {word}
           </div>

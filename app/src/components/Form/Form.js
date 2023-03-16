@@ -7,14 +7,15 @@ import { Header } from "../Header/Header";
 
 export function Form({imgBanner, imgLogo}) {
   const [error, setError] = useState('');
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState([]);
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setCharacter(word.toUpperCase()))
+    const arr = word.toUpperCase().replace(/\s/g, '').split('')
+    dispatch(setCharacter(arr))
     navigate('/result')
   }
 

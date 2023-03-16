@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"; 
 
 const initialState = {
-  word: ''
+  word: []
 }
 
 export const wordSlice = createSlice({
