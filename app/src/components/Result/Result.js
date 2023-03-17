@@ -1,24 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
 import './style.css';
-import { useSelector } from 'react-redux'
 import { Header } from '../Header/Header';
 import { Link } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
+/**
+ * 
+ * @returns component Result with cards, original word and result word and button back
+ */
+
 export function Result () {
-  const [arrWord, setArrWord] = useState([])
+  const [arrCharacter, setArrCharacter] = useState([])
   const [isFinalyApp, setIsFinalyApp] = useState(false)
   const exitModal = useRef(null)
 
-  const character = useSelector(state => state.character)
+  /**
+   * get word from local storage
+   */
 
   useEffect(() => {
-    setArrWord(character.character)
+    setArrCharacter(window.localStorage.getItem('arrCharacter').split(','))
   }, [])
 
+  /**
+   * verify if win the game
+   */
   useEffect(() => {
-    if (arrWord.length === 0) return
-    if (arrWord.length === new Set(arrWord).size) {
+    if (arrCharacter.length === 0) return
+    if (arrCharacter.length === new Set(arrCharacter).size) {
       setIsFinalyApp(true)
       confetti({
         particleCount: 200,
@@ -29,15 +38,30 @@ export function Result () {
     return () => {
       setIsFinalyApp(false)
     }
-  }, [arrWord])
+  }, [arrCharacter])
 
-  const handleClick = (word, index) => {
-    setArrWord(arrWord.filter((el,i) => el !== word ? el : i === index ? el : null ))
+  /**
+   * 
+   * @param {*} character character of card
+   * @param {*} index  index of character in array
+   * @returns delete character of array
+   */
+
+  const handleClick = (character, index) => {
+    setArrCharacter(arrCharacter.filter((el,i) => el !== character ? el : i === index ? el : null ))
   }
+
+  /** 
+   * @returns add class exit to modal for close modal
+  */
 
   const handleExit = () => {
     exitModal.current = document.querySelector('.container-finaly-app')
     exitModal.current.classList.add('exit')
+  }
+
+  const handleDeleteStorage = () => {
+    window.localStorage.removeItem('arrCharacter')
   }
 
   return (
@@ -54,7 +78,7 @@ export function Result () {
     }
       <section className='container-card'>
       {
-        arrWord.map((word, i) => (
+        arrCharacter.map((word, i) => (
           <div key={i} className={`${word} card`} onClick={() => handleClick(word, i)} >
             <span className='icon-times'></span>
             {word}
@@ -65,14 +89,14 @@ export function Result () {
       <section className='container-result-word'>
         <div className='original-word'>
           <p>Original word </p>
-          <p className='bg-result'>{character.character}</p>
+          <p className='bg-result'>{arrCharacter}</p>
         </div>
         <div className='result-word'>
           <p>Result word </p>
-          <p className='bg-result'>{isFinalyApp ? new Set ([...arrWord]) : '' }</p>
+          <p className='bg-result'>{isFinalyApp ? new Set ([...arrCharacter]) : '' }</p>
         </div>
       </section>
-      <Link to='/'><button className='btn-back'>Back</button></Link>
+      <Link to='/'><button onClick={handleDeleteStorage} className='btn-back'>Back</button></Link>
     </>
   )
 }

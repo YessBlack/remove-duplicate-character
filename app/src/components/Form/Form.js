@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './style.css';
-import { useDispatch } from "react-redux";
-import { setCharacter } from "../../feature/word/characterSlice";
 import { Header } from "../Header/Header";
+
+/**
+ * 
+ * @param {imgLogo, imgLogo} param0 paths of images
+ * @returns component Form with inputs and button
+ */
 
 export function Form({imgBanner, imgLogo}) {
   const [error, setError] = useState('');
   const [arrCharacter, setArrCharacter] = useState([]);
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const arrFinalCharacter = arrCharacter.toUpperCase().replace(/\s/g, '').split('')
-
-    dispatch(setCharacter(arrFinalCharacter))
-    navigate('/result')
-  }
-
+  /**
+   * 
+   * @param {*} e event of input 
+   * @returns word without spaces and numbers
+   */
   const handleChange = (e) => {
     const newCharacter = e.target.value
 
@@ -31,6 +31,20 @@ export function Form({imgBanner, imgLogo}) {
     }
     setError(null)
     setArrCharacter(e.target.value)
+  }
+
+  /**
+   * 
+   * @param {*} e event of form
+   * @returns navigate to result page and save word in local storage
+   */
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const arrFinalCharacter = arrCharacter.toUpperCase().replace(/\s/g, '').split('')
+
+    window.localStorage.setItem('arrCharacter', arrFinalCharacter)
+    navigate('/result')
   }
 
   return (
