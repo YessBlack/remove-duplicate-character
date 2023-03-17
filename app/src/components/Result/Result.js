@@ -10,10 +10,10 @@ export function Result () {
   const [isFinalyApp, setIsFinalyApp] = useState(false)
   const exitModal = useRef(null)
 
-  const word= useSelector(state => state.word)
+  const character = useSelector(state => state.character)
 
   useEffect(() => {
-    setArrWord(word.word)
+    setArrWord(character.character)
   }, [])
 
   useEffect(() => {
@@ -38,17 +38,6 @@ export function Result () {
   const handleExit = () => {
     exitModal.current = document.querySelector('.container-finaly-app')
     exitModal.current.classList.add('exit')
-  }
-
-  const randomColors = (num) => {
-    let hexadecimal = "0123456789ABCDEF";
-	  let color = "#";
-
-	  for(var i = 0; i < 6; i++){
-		  color = color + hexadecimal[Math.floor(Math.random() * 16)];
-	  }
-
-    return color
   }
 
   return (
@@ -76,11 +65,11 @@ export function Result () {
       <section className='container-result-word'>
         <div className='original-word'>
           <p>Original word </p>
-          <p className='bg-result'>{word.word}</p>
+          <p className='bg-result'>{character.character}</p>
         </div>
         <div className='result-word'>
           <p>Result word </p>
-          <p className='bg-result'>{isFinalyApp ? new Set ([...arrWord]) : 'holii' }</p>
+          <p className='bg-result'>{isFinalyApp ? new Set ([...arrWord]) : '' }</p>
         </div>
       </section>
       <Link to='/'><button className='btn-back'>Back</button></Link>

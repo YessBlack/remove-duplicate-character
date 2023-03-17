@@ -3,11 +3,12 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 3rem;
+  gap: 2rem;
 }
 
-.container-form img {
-  width: 400px;
+.container-form .banner {
+  width: 300px;
+  display: none;
 }
 
 .img-logo img {
@@ -21,16 +22,18 @@
   justify-content: center;
   background-color:  hsl(223 5% 20% / 70%);
   border-radius: 10px;
-  width: 400px;
+  width: 380px;
   height: 400px;
   justify-content: space-evenly;
 }
+
 .form-inputs {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
 }
+
 .form-inputs input, .form-inputs button {
   padding: 1rem;
   border-radius: 5px;
@@ -38,14 +41,24 @@
   width: 300px;
   font-size: 1rem;
 }
+
 .form-inputs button {
   background-color: #484295;
   color: #fff;
 }
+
 .error {
   color: red;
   text-align: center;
 }
+
 .form-inputs input::placeholder {
   text-align: center;
+}
+
+@media (min-width:820px) {
+  .container-form .banner {
+    width: 400px;
+    display: block;
+  }
 }

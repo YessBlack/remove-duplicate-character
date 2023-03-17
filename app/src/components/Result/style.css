@@ -6,6 +6,7 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   text-align: center;
   font-size: 2rem;
+  padding: 1rem;
 }
 .card {
   /*background-color: #DAAEFD; */
@@ -20,9 +21,12 @@
   font-size: 3rem;
 }
 .container-result-word {
-  width: 100%;
+  gap: 1rem;
+  width: 95%;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   background-color: rgba(106, 93, 93, .1);
   padding: 2rem;
   border-radius: 10px;
@@ -31,6 +35,7 @@
   text-align: center;
 }
 .bg-result {
+  height: 55px;
   background-color: #484295;
   padding: 1rem;
   border-radius: 10px;

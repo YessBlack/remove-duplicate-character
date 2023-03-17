@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import wordSlice from '../feature/word/wordSlice'
+import characterSlice from '../feature/word/characterSlice'
 
 export const store = configureStore({
   reducer: {
-    word: wordSlice
+    character: characterSlice
   },
 })
