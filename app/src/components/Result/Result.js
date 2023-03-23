@@ -14,14 +14,16 @@ export function Result () {
   const [isFinalyApp, setIsFinalyApp] = useState(false)
   const exitModal = useRef(null)
 
+  const characterLocalStorage = window.localStorage.getItem('arrCharacter')
+
   /**
    * get word from local storage
    */
 
   useEffect(() => {
-    setArrCharacter(window.localStorage.getItem('arrCharacter').split(','))
+    setArrCharacter(characterLocalStorage.replace(/\s/g, '').split(''))
   }, [])
-
+  
   /**
    * verify if win the game
    */
@@ -89,7 +91,7 @@ export function Result () {
       <section className='container-result-word'>
         <div className='original-word'>
           <p>Original word </p>
-          <p className='bg-result'>{arrCharacter}</p>
+          <p className='bg-result'>{characterLocalStorage}</p>
         </div>
         <div className='result-word'>
           <p>Result word </p>

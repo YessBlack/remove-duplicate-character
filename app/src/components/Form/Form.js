@@ -11,7 +11,7 @@ import { Header } from "../Header/Header";
 
 export function Form({imgBanner, imgLogo}) {
   const [error, setError] = useState('');
-  const [arrCharacter, setArrCharacter] = useState([]);
+  const [arrCharacter, setArrCharacter] = useState('');
 
   const navigate = useNavigate()
 
@@ -41,9 +41,8 @@ export function Form({imgBanner, imgLogo}) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const arrFinalCharacter = arrCharacter.toUpperCase().replace(/\s/g, '').split('')
-
-    window.localStorage.setItem('arrCharacter', arrFinalCharacter)
+    const character = arrCharacter.toUpperCase()
+    window.localStorage.setItem('arrCharacter', character)
     navigate('/result')
   }
 
